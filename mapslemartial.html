@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ratchet</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="196x196" href="/icon.png">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="favicon.ico">
+    <meta name="mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/css/ratchet.min.css">
+
+     <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0 }
+            #map_canvas { height: 100% }
+            </style>
+
+      <script src="lib/jquery-1.8.2.min.js"></script>   
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+   
+          
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?sensor=true">
+            </script>
+        <script type="text/javascript">
+            
+  
+            
+            var map
+            var marcador
+            var yo
+
+                      
+            function initialize() {
+                var latlng = new google.maps.LatLng(-54.807178,-68.307892);
+                var myOptions = {
+                    zoom: 13,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map_canvas"),
+                                          myOptions);
+                
+                
+               }
+            
+            function mostrarUbicacion(){
+                navigator.geolocation.getCurrentPosition( lecturaGPS , errorGPS , {enableHighAccuracy:true} )
+            }
+            
+            function lecturaGPS(ubicacion){
+                
+                var miubicacion = new google.maps.LatLng(ubicacion.coords.latitude, ubicacion.coords.longitude);
+                var lemartial = new google.maps.LatLng(-54.798632, -68.370747);
+
+                  yo = new google.maps.Marker( {
+                                                  position: miubicacion,
+                                                  map:map,
+                                                  title:'Aca estoy yo'   
+                                                  })
+                
+   
+                map.setCenter(miubicacion)
+
+                marcador = new google.maps.Marker( {
+                                                  position: lemartial,
+                                                  map:map,
+                                                  title:'Glaciar Le Martial'   
+                                                  })
+
+              /*  var lat1 =-53.788077
+                var lon1= -67.708912
+                     
+
+                var latitud=ubicacion.coords.latitude
+                var longitud=ubicacion.coords.longitude
+                
+                var R=6371 //km----(cambiar esta constante par obtener millas)
+                var dLat= (latitud - lat1) * Math.PI / 180;
+                var dLon= (longitud - lon1) * Math.PI / 180;
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI/180) * Math.cos(latitud * Math.PI/180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+                var c= Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+                var d=R * c;
+
+                if (d>1){
+                 d= Math.round(d*100)/100;
+                  $('#Get_Distance').html("Distancia aproximada: " + d + " Km");
+                }
+                else if (d<=1){
+                 d= Math.round(d*1000);
+                  $('#Get_Distance').html("Distancia aproximada: " + d + " metros");
+                }
+
+              */
+               
+           
+
+            }
+            
+            function errorGPS(){
+                alert(" no puedo encontrarte :(")
+            }
+            
+
+           
+
+          
+            </script>
+
+  </head>
+  <body ontouchstart="" onload="initialize()">
+    <header class="bar bar-nav">
+      <a class="icon icon-left-nav pull-left" href="/lemartial.html" data-transition="slide-out"></a>
+      <h1 class="title">Glaciar Le Martial</h1>
+    </header>
+    <div class="content">
+    
+         
+           
+                <div id="map_canvas" style="width:100%; height:90%"></div>
+        
+                 <button onClick="mostrarUbicacion()"> mostrar mi ubicacion y la del Glaciar </button>
+                             
+                 <p >Distancia aproximada 5 Km</p>
+
+       
+     
+    </div>
+  </body>
+</html>

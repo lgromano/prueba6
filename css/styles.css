@@ -1,0 +1,28 @@
+body{
+	background:#1485cc;
+	font-family:Arial;
+	text-align:center;
+	color:#0a0101;
+	}
+
+
+div{
+  text-align:left;	
+}
+
+/* Esta imagen de adapta al ancho de lo que lo contenga con un máximo de 600px */
+#portada{
+width:100%;
+max-width:650px;
+height:auto;
+}
+
+.title{
+	color:#f8f9fc;
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.bar{
+background-color:#1e31b8;
+}
